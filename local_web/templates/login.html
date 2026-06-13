@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CMoree Вход</title>
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --bg:#eef5fb;--s1:rgba(255,255,255,.84);--s2:#ffffff;--s3:#f2f7ff;--s4:#e6f0ff;
+ --bd:#d7e4f2;--bd2:#bccfe6;
+ --accent:#1d74f5;--accent2:#54a7ff;--accent-dim:rgba(29,116,245,.10);--accent-glow:rgba(29,116,245,.18);
+ --red:#d85b63;--red-dim:rgba(216,91,99,.12);
+ --green:#1ea971;--green-dim:rgba(30,169,113,.11);
+ --amber:#d79333;--amber-dim:rgba(215,147,51,.12);
+ --text:#18334c;--t2:#5f7591;--t3:#8ca0b8;
+ --mono:'JetBrains Mono',monospace;--sans:'Manrope',sans-serif;
+ --r3:20px;--r2:12px;
+}
+html,body{height:100%;overflow:hidden}
+body{
+ background:
+  radial-gradient(circle at top left, rgba(29,116,245,.14), transparent 24%),
+  radial-gradient(circle at bottom right, rgba(84,167,255,.16), transparent 26%),
+  linear-gradient(180deg,#f7fbff,#eef5fb 42%,#edf3f8 100%);
+ color:var(--text);
+ font-family:var(--sans);
+ display:flex;
+ flex-direction:column;
+}
+.topbar{height:58px;display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(255,255,255,.78);border-bottom:1px solid var(--bd);flex-shrink:0;backdrop-filter:blur(18px);box-shadow:0 14px 36px rgba(37,81,136,.08)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-logo{width:26px;height:26px;object-fit:contain;border-radius:4px}
+.brand-name{font-size:17px;font-weight:800;letter-spacing:.4px;color:var(--text);display:inline-block}
+.brand-sep{width:1px;height:20px;background:var(--bd);margin:0 4px}
+.srv-label{font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spacer{flex:1}
+.status-pill{display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.4px;border:1px solid var(--green);background:var(--green-dim);color:var(--green)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes liftIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.shell{flex:1;display:flex;flex-direction:column;min-height:0}
+.page{flex:1;overflow:auto;padding:20px}
+.login-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:14px;align-items:stretch}
+.hero,.form-card{background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(245,249,255,.98));border:1px solid var(--bd);border-radius:20px;position:relative;overflow:hidden;box-shadow:0 24px 54px rgba(28,74,128,.10);animation:liftIn .45s ease both}
+.hero{padding:28px;min-height:100%}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.hero::before{width:240px;height:240px;top:-120px;right:-70px;background:radial-gradient(circle, rgba(29,116,245,.20), transparent 70%)}
+.hero::after{width:180px;height:180px;bottom:-80px;left:-60px;background:radial-gradient(circle, rgba(33,184,215,.12), transparent 70%)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--accent-dim);border:1px solid rgba(79,142,247,.28);color:var(--accent2);font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:800;position:relative;z-index:1}
+.hero h1{margin-top:16px;font-size:31px;line-height:1.08;font-weight:800;position:relative;z-index:1}
+.lead{margin-top:12px;color:var(--t2);font-size:14px;line-height:1.7;max-width:640px;position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px;position:relative;z-index:1}
+.mini-card{background:rgba(255,255,255,.78);border:1px solid var(--bd);border-radius:16px;padding:14px}
+.mc-top{display:flex;align-items:center;gap:10px}
+.mc-ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(79,142,247,.24);flex-shrink:0}
+.mini-card strong{font-size:13px;color:var(--text)}
+.mini-card p{margin-top:8px;color:var(--t2);font-size:12px;line-height:1.55}
+.hero-list{margin-top:18px;display:grid;gap:10px}
+.feature{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;border:1px solid var(--bd);border-radius:16px;background:rgba(255,255,255,.74)}
+.feature .fi{width:32px;height:32px;border-radius:10px;background:var(--green-dim);border:1px solid rgba(61,214,140,.22);color:var(--green);display:grid;place-items:center;flex-shrink:0}
+.feature strong{display:block;font-size:13px}
+.feature span{display:block;margin-top:4px;font-size:12px;color:var(--t2);line-height:1.45}
+.hero-footer{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.mono-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;border:1px solid var(--bd);background:rgba(255,255,255,.74);font-family:var(--mono);font-size:11px;color:var(--t2)}
+.form-card{padding:24px;animation-delay:.08s}
+.form-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.form-head h2{font-size:18px;line-height:1.1}
+.form-head p{color:var(--t3);font-size:12px;font-family:var(--mono);margin-top:4px}
+.warn,.err{border-radius:16px;padding:14px 14px 13px;border:1px solid var(--bd);background:rgba(255,255,255,.74);margin-bottom:12px}
+.warn{border-color:rgba(240,164,68,.24);background:var(--amber-dim);color:#ffe4b6}
+.warn strong{display:block;font-size:12px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:5px;font-weight:800;color:var(--amber)}
+.field{display:grid;gap:6px}
+.field label{font-size:11px;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);font-weight:700}
+.field input{background:rgba(250,252,255,.96);border:1px solid var(--bd2);border-radius:var(--r2);padding:11px 12px;color:var(--text);font-family:var(--sans);font-size:14px;outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.field input::placeholder{color:var(--t3)}
+.setup-form{display:grid;gap:12px}
+.actions{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:4px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r2);border:1px solid var(--bd2);background:rgba(255,255,255,.92);color:var(--text);font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all .16s ease;user-select:none;text-decoration:none;box-shadow:0 10px 22px rgba(43,89,145,.06)}
+.btn:hover{background:var(--s3);border-color:var(--bd2);transform:translateY(-1px)}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.err{display:flex;gap:10px;align-items:flex-start;border-color:rgba(224,84,96,.24);background:var(--red-dim);color:#ffd5da}
+.err i{color:var(--red);margin-top:2px}
+.foot-note{font-size:11px;color:var(--t3);font-family:var(--mono);line-height:1.45;max-width:280px;text-align:right}
+@media (max-width:1080px){
+ .login-grid{grid-template-columns:1fr}
+ .hero h1{font-size:28px}
+ .hero-grid{grid-template-columns:1fr}
+ .foot-note{text-align:left;max-width:none}
+}
+@media (max-width:720px){
+ .page{padding:12px}
+ .hero,.form-card{padding:18px;border-radius:18px}
+ .hero h1{font-size:24px}
+ .actions{flex-direction:column;align-items:stretch}
+ .btn{justify-content:center}
+ .foot-note{text-align:center}
+}
+/* Dark theme override */
+:root{
+ --bg:#0f1117;--s1:rgba(18,22,30,.94);--s2:#161b24;--s3:#1d2535;--s4:#243146;
+ --bd:#2a3147;--bd2:#3a4560;
+ --accent:#4f8ef7;--accent2:#6aa3ff;--accent-dim:rgba(79,142,247,.12);--accent-glow:rgba(79,142,247,.18);
+ --red:#e05460;--red-dim:rgba(224,84,96,.14);
+ --green:#3dd68c;--green-dim:rgba(61,214,140,.12);
+ --amber:#f0a444;--amber-dim:rgba(240,164,68,.12);
+ --text:#e8ecf4;--t2:#90a0ba;--t3:#5d6b84;
+}
+body{
+ background:
+  radial-gradient(circle at top right, rgba(79,142,247,.12), transparent 24%),
+  radial-gradient(circle at 18% 10%, rgba(61,214,140,.07), transparent 18%),
+  linear-gradient(180deg,#121722,#0f1117 48%,#0d1016 100%);
+ color:var(--text);
+}
+.topbar{background:rgba(15,19,27,.88);border-color:var(--bd);box-shadow:0 18px 42px rgba(0,0,0,.24)}
+.hero,.form-card,.mini-card,.feature,.mono-pill,.warn,.err{background:var(--s2);border-color:var(--bd);color:var(--text);box-shadow:0 20px 42px rgba(0,0,0,.26)}
+.hero::before{background:radial-gradient(circle, rgba(79,142,247,.18), transparent 70%)}
+.hero::after{background:radial-gradient(circle, rgba(61,214,140,.10), transparent 70%)}
+.brand-name{color:#eaf4ff}
+.status-pill{background:var(--green-dim);border-color:var(--green);color:var(--green)}
+.field input{background:var(--s1);border-color:var(--bd2);color:var(--text)}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.field input::placeholder{color:var(--t3)}
+.btn{background:var(--s2);border-color:var(--bd2);color:var(--text);box-shadow:0 12px 24px rgba(0,0,0,.18)}
+.btn:hover{background:var(--s3);border-color:var(--bd2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.feature,.mini-card,.mono-pill{background:rgba(255,255,255,.03)}
+.lead,.mini-card p,.feature span,.foot-note,.form-head p,.srv-label{color:var(--t2)}
+.warn{background:var(--amber-dim);border-color:rgba(240,164,68,.26)}
+.warn strong{color:var(--amber)}
+.err{background:var(--red-dim);border-color:rgba(224,84,96,.26)}
+</style>
+<link rel="stylesheet" href="/static/ui-refresh.css?v=20260420a">
+<link rel="stylesheet" href="/static/mobile-ux.css?v=20260508a">
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="/static/logo.png" alt="CMoree logo" onerror="this.style.display='none'">
+      <div class="brand-name">Moree</div>
+      <div class="brand-sep"></div>
+      <div class="srv-label">{{ config.server_name if config and config.server_name else 'pzserver' }}</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="status-pill"><span class="status-dot"></span>Вход в панель</div>
+  </div>
+
+  <main class="page">
+    <div class="login-grid">
+      <section class="hero">
+        <div class="eyebrow"><i class="fas fa-shield-halved"></i> Учетные записи</div>
+        <h1>Войдите в панель и управляйте сервером через понятные права</h1>
+        <p class="lead">
+          Главная учетная запись создается на этапе setup, а затем доступ к разделам панели
+          регулируется отдельными правами: консоль, конфиги, аддоны, логи, база и планировщик.
+        </p>
+
+        <div class="hero-grid">
+          <div class="mini-card">
+            <div class="mc-top">
+              <div class="mc-ico"><i class="fas fa-key"></i></div>
+              <strong>Первый доступ</strong>
+            </div>
+            <p>Для входа используйте данные учетной записи, созданной при первоначальной настройке панели.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mc-top">
+              <div class="mc-ico"><i class="fas fa-terminal"></i></div>
+              <strong>Консоль под правами</strong>
+            </div>
+            <p>Команды в консоль отправляются только при наличии соответствующего права на сервере.</p>
+          </div>
+        </div>
+
+        <div class="hero-list">
+          <div class="feature">
+            <div class="fi"><i class="fas fa-lock"></i></div>
+            <div>
+              <strong>Ограничение по ролям</strong>
+              <span>Можно выдать доступ только к нужным разделам: сервер, конфиги, Workshop, логи, база и планировщик.</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="fi"><i class="fas fa-user-shield"></i></div>
+            <div>
+              <strong>Безопасный вход</strong>
+              <span>После первого входа доступ можно менять, не трогая основной способ авторизации.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-footer">
+          <span class="mono-pill"><i class="fas fa-shield"></i> доступы настраиваются вручную</span>
+          <span class="mono-pill"><i class="fas fa-circle-info"></i> вход по учетной записи</span>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="form-head">
+          <div>
+            <h2>Вход в панель</h2>
+            <p>Авторизация с учетом прав доступа и блокировкой команд без разрешения.</p>
+          </div>
+        </div>
+
+        {% if error %}
+        <div class="err"><i class="fas fa-circle-exclamation"></i><div>{{ error }}</div></div>
+        {% endif %}
+
+        <form method="POST" class="setup-form">
+          <div class="field">
+            <label for="username">Логин</label>
+            <input id="username" name="username" placeholder="Логин" autocomplete="username" required autofocus>
+          </div>
+          <div class="field">
+            <label for="password">Пароль</label>
+            <input id="password" name="password" type="password" placeholder="Пароль" autocomplete="current-password" required>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary"><i class="fas fa-right-to-bracket"></i> Войти</button>
+            <div class="foot-note">Если вы только что прошли setup, войдите с учетными данными, созданными при настройке.</div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>
